@@ -1,0 +1,22 @@
+:root {
+  --color-transparent: transparent;
+  --color-white: #FFFFFF;
+  --color-light: #eff2f6;
+  --color-black: #000000;
+  --color-dark: #212121;
+  --color-green: #23B838;
+  --color-gray: #999999;
+  --color-light-gray: #ACACAC;
+
+  --font-family: 'Rubik', sans-serif;
+
+  --font-weight-regular: normal;
+}
+
+@font-face {
+  font-family: 'Rubik', sans-serif;
+  src: url('assets/fonts/rubik-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
