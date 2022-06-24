@@ -21,10 +21,17 @@ export interface RoutedTabsProps {
   onChangePath?: Event<string>;
 }
 
-export function Tabs({routes, defaultPath = routes[0].path, children, className, onChangePath}: RoutedTabsProps) {
+export function Tabs({
+  routes,
+  defaultPath = routes[0].path,
+  children,
+  className,
+  onChangePath,
+}: RoutedTabsProps) {
   const rootElem = useRef<HTMLDivElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const areaRef = useRef<HTMLDivElement | null>(null);
   const prevStartsAt = useRef<number>(0);
   const [, callForceRerender] = useState({});
   const [startsAt, setStartsAt] = useState(0);
@@ -32,6 +39,14 @@ export function Tabs({routes, defaultPath = routes[0].path, children, className,
   const defaultPathIndex = routes.findIndex((e) => e.path === defaultPath);
 
   const [tabIndex, setTabIndex] = useState(defaultPathIndex);
+
+  useEffect(() => {
+    if (!areaRef.current) {
+      return;
+    }
+
+    areaRef.current.scrollTop = areaRef.current.scrollHeight;
+  });
 
   const listWidth = useCallback(() => {
     const list = listRef.current && listRef.current.children[0];
@@ -121,13 +136,13 @@ export function Tabs({routes, defaultPath = routes[0].path, children, className,
         </S.ScrollContainer>
         {children}
       </S.HeaderContainer>
-      <div>
+      <S.TabsListContainer ref={areaRef}>
         {routes.map(({path, component}, index) => (
           <TabPanel key={path} index={index}>
             {component}
           </TabPanel>
         ))}
-      </div>
+      </S.TabsListContainer>
     </S.StyledTabs>
   );
 }

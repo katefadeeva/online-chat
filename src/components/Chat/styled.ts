@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {SizeChat} from '../../types/chat';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -7,15 +8,18 @@ export const MainContainer = styled.div`
   padding: 20px;
 `;
 
-export const Chat = styled.div<{expand: boolean}>`
-  width: ${(p) => (p.expand ? 360 : 70)}px;
-  height: ${(p) => (p.expand ? 400 : 70)}px;
-  border-radius: ${(p) => (p.expand ? '20px' : '50%')};
-  background-color: ${(p) => (p.expand ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.6)')};
+export const Chat = styled.div<{size: SizeChat}>`
+  width: ${(p) =>
+    p.size === SizeChat.Small ? '70px' : p.size === SizeChat.Medium ? '360px' : '100%'};
+  height: ${(p) =>
+    p.size === SizeChat.Small ? '70px' : p.size === SizeChat.Medium ? '400px' : '100%'};
+  border-radius: ${(p) => (p.size !== SizeChat.Small ? '20px' : '50%')};
+  background-color: ${(p) =>
+    p.size !== SizeChat.Small ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.6)'};
   display: flex;
-  align-items: ${(p) => (p.expand ? 'space-between' : 'center')};
+  align-items: ${(p) => (p.size !== SizeChat.Small ? 'space-between' : 'center')};
   justify-content: center;
-  cursor: ${(p) => (p.expand ? 'default' : 'pointer')};
+  cursor: ${(p) => (p.size !== SizeChat.Small ? 'default' : 'pointer')};
 `;
 
 export const IconContainer = styled.div`
@@ -26,4 +30,6 @@ export const IconContainer = styled.div`
   justify-content: center;
 `;
 
-export const ChatContainer = styled.div``;
+export const ChatContainer = styled.div`
+  width: 100%;
+`;

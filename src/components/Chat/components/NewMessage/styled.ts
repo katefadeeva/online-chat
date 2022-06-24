@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const NewMessageContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.33);
+  background-color: rgba(0, 0, 0, 0.7);
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   max-height: 40px;
-  width: 360px;
+  width: 100%;
   cursor: text;
   .react-emoji {
     height: 40px;

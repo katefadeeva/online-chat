@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import {Tabs} from '../../../ui-kit/Tabs';
 
-export const StyledTabs = styled(Tabs)`
-  width: 360px;
-` as typeof Tabs;
+export const HeaderActionsContainer = styled.div`
+  width: 115px;
+  display: flex;
+  padding-right: 10px;
+`;
 
 export const LanguagesList = styled.div`
-  width: 56px;
+  width: 90px;
   color: var(--color-white);
 `;
 

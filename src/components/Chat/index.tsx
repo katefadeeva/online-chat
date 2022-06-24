@@ -4,20 +4,21 @@ import * as S from './styled';
 import ChatIcon from '../../assets/img/chat-icon.png';
 import {HeaderAndMassages} from './components/HeaderAndMassages';
 import {NewMassage} from './components/NewMessage';
-import {extendChat$, changeExtendChat} from '../../models/chat';
+import {changeSizeChat, sizeChat$} from '../../models/chat';
+import {SizeChat} from '../../types/chat';
 
 export function Chat() {
-  const extend = useStore(extendChat$);
+  const size = useStore(sizeChat$);
 
   return (
     <S.MainContainer>
-      <S.Chat expand={extend}>
-        {!extend && (
-          <S.IconContainer onClick={() => changeExtendChat(true)}>
+      <S.Chat size={size}>
+        {size === SizeChat.Small && (
+          <S.IconContainer onClick={() => changeSizeChat(SizeChat.Medium)}>
             <img src={ChatIcon} alt='' />
           </S.IconContainer>
         )}
-        {extend && (
+        {size !== SizeChat.Small && (
           <S.ChatContainer>
             <HeaderAndMassages />
             <NewMassage />

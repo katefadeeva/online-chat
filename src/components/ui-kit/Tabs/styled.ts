@@ -1,28 +1,51 @@
-import styled from "styled-components";
-import {TabList, Tabs} from "@reach/tabs";
+import styled from 'styled-components';
+import {TabList, Tabs} from '@reach/tabs';
 
 export const HeaderContainer = styled.div`
   height: 40px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.33);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
 `;
 
+export const TabsListContainer = styled.div`
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  width: 100%;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.33);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-clip: border-box;
+    background-color: transparent;
+    border: 1px solid transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-green);
+    border-radius: 30px;
+    border: 2px solid transparent;
+  }
+`;
+
 export const StyledTabs = styled(Tabs)`
   display: flex;
   flex-direction: column;
   height: calc(100% - 40px);
-  max-width: 100%;
+  width: 100%;
   flex-grow: 1;
 `;
 
 export const ScrollContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 250px;
+  width: 100%;
 `;
 
 export const ScrollButton = styled.button<{hide: boolean}>`

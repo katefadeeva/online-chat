@@ -7,11 +7,12 @@ import {ReactComponent as MinimizeIcon} from '../../../../assets/svg/minimize.sv
 import {Select} from '../../../ui-kit/Select';
 import {MessagesComponent} from './MessagesComponent';
 import {NoDataComponent} from './NoDataComponent';
-import {messagesCommon$, CommonGate} from '../../../../models/chat/common';
+import {CommonGate, messagesCommon$} from '../../../../models/chat/common';
 import {SelectOption} from '../../../ui-kit/Select/types';
-import {changeExtendChat, changePathTab} from '../../../../models/chat';
+import {changePathTab, changeSizeChat, sizeChat$} from '../../../../models/chat';
 import {ClanGate, messagesClan$} from '../../../../models/chat/clan';
-import {RoutedTabProps} from '../../../ui-kit/Tabs';
+import {RoutedTabProps, Tabs} from '../../../ui-kit/Tabs';
+import {SizeChat} from '../../../../types/chat';
 
 const LANGUAGES_OPTIONS: SelectOption[] = [
   {value: 'ru', label: 'RU'},
@@ -21,6 +22,7 @@ const LANGUAGES_OPTIONS: SelectOption[] = [
 export function HeaderAndMassages() {
   const {historyCommon, loadingCommon} = useStore(messagesCommon$);
   const {historyClan, loadingClan} = useStore(messagesClan$);
+  const size = useStore(sizeChat$);
   const [language, setLanguage] = useState<SelectOption | null>(LANGUAGES_OPTIONS[0]);
 
   const TAB_ROUTES: RoutedTabProps[] = useMemo(
@@ -62,20 +64,26 @@ export function HeaderAndMassages() {
   );
 
   return (
-    <S.StyledTabs routes={TAB_ROUTES} onChangePath={changePathTab}>
-      <>
+    <Tabs routes={TAB_ROUTES} onChangePath={changePathTab}>
+      <S.HeaderActionsContainer>
         <S.LanguagesList>
           <Select options={LANGUAGES_OPTIONS} value={language} onChange={setLanguage} />
         </S.LanguagesList>
         <S.ButtonContainer>
-          <button>
+          <button
+            onClick={() =>
+              size === SizeChat.Medium
+                ? changeSizeChat(SizeChat.Big)
+                : changeSizeChat(SizeChat.Medium)
+            }
+          >
             <Icon source={ExtendIcon} width={18} height={18} />
           </button>
-          <button onClick={() => changeExtendChat(false)}>
+          <button onClick={() => changeSizeChat(SizeChat.Small)}>
             <Icon source={MinimizeIcon} width={18} height={18} />
           </button>
         </S.ButtonContainer>
-      </>
-    </S.StyledTabs>
+      </S.HeaderActionsContainer>
+    </Tabs>
   );
 }

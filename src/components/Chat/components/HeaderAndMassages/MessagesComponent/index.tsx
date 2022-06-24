@@ -1,10 +1,9 @@
-import React, {useEffect, useRef} from 'react';
-import {Gate, useGate, useStore} from 'effector-react';
+import React from 'react';
+import {Gate, useGate} from 'effector-react';
 import {Spinner} from '../../../../ui-kit/Spinner';
 import * as S from './styled';
 import {Message} from '../../../../../types/chat';
 import {MessageComponent} from './Message';
-import {isNewMessage$} from '../../../../../models/chat/common';
 
 interface Props {
   data: Message[];
@@ -14,19 +13,9 @@ interface Props {
 
 export function MessagesComponent({data, loading, gate}: Props) {
   useGate(gate);
-  const areaRef = useRef<HTMLDivElement | null>(null);
-  const isNewMessage = useStore(isNewMessage$);
-
-  useEffect(() => {
-    if (!areaRef.current || (areaRef.current.scrollTop && !isNewMessage)) {
-      return;
-    }
-
-      areaRef.current.scrollTop = areaRef.current.scrollHeight;
-  });
 
   return (
-    <S.MainContainer ref={areaRef}>
+    <S.MainContainer>
       {loading && (
         <S.LoadingContainer>
           <Spinner radius={20} />

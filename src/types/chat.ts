@@ -1,5 +1,11 @@
 import {FunctionComponent, SVGProps} from 'react';
 
+export enum SizeChat {
+  Small = 'Small',
+  Medium = 'Medium',
+  Big = 'Big',
+}
+
 export interface Message {
   id: string;
   from: string;
@@ -12,5 +18,5 @@ export interface Message {
 
 export interface MessageRequest {
   from: string;
-  test: string;
+  text: string;
 }
